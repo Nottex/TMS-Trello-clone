@@ -1,0 +1,28 @@
+.header {
+	background-color: #8fb0ee;
+	padding: 20px 0 20px;
+}
+.header__wrapper {
+	margin: auto;
+	width: 80%;
+	display: flex;
+	justify-content: space-between;
+}
+.header__logo {
+	font-weight: 700;
+	font-size: 30px;
+	font-style: italic;
+}
+.header__clock {
+	background-color: #c7dcf1;
+	width: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+.header__time {
+	font-weight: 700;
+	font-size: 25px;
+}
