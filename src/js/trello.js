@@ -111,7 +111,6 @@ function handleClickConfirmButton() {
 	data.push(newTodo);
 	setDataToStorage();
 	render();
-	updateCounters();
 	resetModal();
 }
 
@@ -146,6 +145,7 @@ function render() {
 		containerElement.insertAdjacentHTML('beforeend', template)
 		})
 	
+	updateCounters()
 }
 
 // function render() {
@@ -194,8 +194,27 @@ function resetView() {
 
 // Todo counter
 function updateCounters() {
-	let todoCounterElement = $(".todo__header-counter");
-	todoCounterElement.textContent = data.length;
+	const todoCounterElement = $(".todo-counter");
+	const inProgressCounterElement = $('.inProgress-counter')
+	const doneCounterElement = $('.done-counter')
+
+	let todoCounter = 0;
+	let inProgressCounter = 0;
+	let doneCounter = 0;
+
+	data.forEach((todo) => {
+		if(todo.state == 'todo') {
+			todoCounter += 1
+		} else if( todo.state == 'inProgress') {
+			inProgressCounter += 1
+		} else if( todo.state == 'done') {
+			doneCounter += 1
+		}
+	})
+
+	todoCounterElement.textContent = todoCounter;
+	inProgressCounterElement.textContent = inProgressCounter;
+	doneCounterElement.textContent = doneCounter;
 }
 
 // Reset modal
@@ -223,7 +242,6 @@ function handleClickRemoveButton({ target }) {
 	
 	setDataToStorage();
 	render();
-	updateCounters();
 }
 
 todoItemElem.addEventListener('click', handleClickRemoveButton) // Рабочая версия кнопки удаления
@@ -232,7 +250,6 @@ todoItemElem.addEventListener('click', handleClickRemoveButton) // Рабоча�
 
 if (data.length) {
 	render();
-	updateCounters();
 }
 
 // TEST ANYTHING
@@ -277,6 +294,24 @@ function changeColumn2({ target }) {
 	const selectValue = selectElement.value
 
 	currElemOfData.state = `${selectValue}`
+
+	//Попытка алерта (Вроде работает)
+	let test = 0;
+
+	data.forEach((todo) => {
+		if (todo.state == 'inProgress') {
+			test += 1
+			console.log(test);
+		} 
+	})
+
+	if(test == 7) {
+		alert('Warning')
+
+		setDataToStorage()
+
+		return
+	}
 
 	setDataToStorage();
 	render()
