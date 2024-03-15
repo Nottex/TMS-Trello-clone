@@ -1,11 +1,11 @@
-import { Modal, Dropdown } from 'bootstrap'
+import { Modal, Dropdown } from "bootstrap";
 
 function $(selector) {
-	return document.querySelector(selector)
+	return document.querySelector(selector);
 }
 
 function $$(selector) {
-	return [...document.querySelectorAll(selector)]
+	return [...document.querySelectorAll(selector)];
 }
 
 // const data = [];
@@ -58,9 +58,11 @@ function createTodo(title, description, userName) {
 const confirmBtnElement = $(".modal__confirm-btn");
 
 function buildTemplate({ id, title, description, createdAt, userName, state }) {
-	const time = `${createdAt.getDate().toString().padStart(2, "0")}.${
-		(createdAt.getMonth() + 1).toString().padStart(2,'0')
-	}.${createdAt.getFullYear()} ${createdAt
+	const time = `${createdAt.getDate().toString().padStart(2, "0")}.${(
+		createdAt.getMonth() + 1
+	)
+		.toString()
+		.padStart(2, "0")}.${createdAt.getFullYear()} ${createdAt
 		.getHours()
 		.toString()
 		.padStart(2, "0")}:${createdAt.getMinutes().toString().padStart(2, "0")}`;
@@ -99,13 +101,13 @@ function buildTemplate({ id, title, description, createdAt, userName, state }) {
 // Handlers
 const modalInputTitleElement = $(".modal__input-title");
 const modalDescriptionElement = $(".modal__description-input");
-const modalUserNameElement = $(".modal__footer-select");
+const selectUsersElement = $(".create-users__select");
 
 function handleClickConfirmButton() {
 	const title = modalInputTitleElement.value;
 	const description = modalDescriptionElement.value;
 	const userName =
-		modalUserNameElement.options[modalUserNameElement.selectedIndex].text;
+		selectUsersElement.options[selectUsersElement.selectedIndex].text;
 	const newTodo = createTodo(title, description, userName);
 
 	data.push(newTodo);
@@ -118,8 +120,8 @@ confirmBtnElement.addEventListener("click", handleClickConfirmButton);
 
 // render
 const todoContainer = $("#todo");
-const inProgressContainer = $('#inProgress') 
-const doneContainer = $('#done')
+const inProgressContainer = $("#inProgress");
+const doneContainer = $("#done");
 
 // function render() {
 // 	let html = ''
@@ -131,21 +133,21 @@ const doneContainer = $('#done')
 // 		containerElement.innerHTML = html
 // 		}
 // 	)
-	
+
 // }
 
 // !! НЕ РАБОЧИЙ через insertAdjacent(Плодит много копий)
 function render() {
-	resetView()
-	
+	resetView();
+
 	data.forEach((todo) => {
 		const template = buildTemplate(todo);
-		const containerElement = $(`#${todo.state}`)
+		const containerElement = $(`#${todo.state}`);
 
-		containerElement.insertAdjacentHTML('beforeend', template)
-		})
-	
-	updateCounters()
+		containerElement.insertAdjacentHTML("beforeend", template);
+	});
+
+	updateCounters();
 }
 
 // function render() {
@@ -157,14 +159,13 @@ function render() {
 // 		html += template
 // 		containerElement.innerHTML = html
 // 	})
-	
+
 // }
 
 // !!НЕ РАБОЧИЙ рендер через IF
 // function render() {
 // 	let html = ''
-	
-	
+
 // 	data.forEach((todo) => {
 // 		const template = buildTemplate(todo);
 // 		html += template
@@ -178,39 +179,37 @@ function render() {
 // 		}
 // 	})
 
-		
 // }
 
-
 function resetView() {
-	const todoElem = $('#todo')
-	const progressElem = $('#inProgress')
-	const doneElem = $('#done')
+	const todoElem = $("#todo");
+	const progressElem = $("#inProgress");
+	const doneElem = $("#done");
 
-	todoElem.innerHTML = ''
-	progressElem.innerHTML = ''
-	doneElem.innerHTML = ''
+	todoElem.innerHTML = "";
+	progressElem.innerHTML = "";
+	doneElem.innerHTML = "";
 }
 
 // Todo counter
 function updateCounters() {
 	const todoCounterElement = $(".todo-counter");
-	const inProgressCounterElement = $('.inProgress-counter')
-	const doneCounterElement = $('.done-counter')
+	const inProgressCounterElement = $(".inProgress-counter");
+	const doneCounterElement = $(".done-counter");
 
 	let todoCounter = 0;
 	let inProgressCounter = 0;
 	let doneCounter = 0;
 
 	data.forEach((todo) => {
-		if(todo.state == 'todo') {
-			todoCounter += 1
-		} else if( todo.state == 'inProgress') {
-			inProgressCounter += 1
-		} else if( todo.state == 'done') {
-			doneCounter += 1
+		if (todo.state == "todo") {
+			todoCounter += 1;
+		} else if (todo.state == "inProgress") {
+			inProgressCounter += 1;
+		} else if (todo.state == "done") {
+			doneCounter += 1;
 		}
-	})
+	});
 
 	todoCounterElement.textContent = todoCounter;
 	inProgressCounterElement.textContent = inProgressCounter;
@@ -224,7 +223,7 @@ function resetModal() {
 }
 
 // Удаление текущей карточки
-const todoItemElem = $('.todos')
+const todoItemElem = $(".todos");
 
 function handleClickRemoveButton({ target }) {
 	const { role } = target.dataset;
@@ -239,14 +238,13 @@ function handleClickRemoveButton({ target }) {
 	data.splice(index, 1);
 
 	// rootElement.remove() // если не прописать, то удаляет эл-т в массиве, но не с вёрстки
-	
+
 	setDataToStorage();
 	render();
 }
 
-todoItemElem.addEventListener('click', handleClickRemoveButton) // Рабочая версия кнопки удаления
+todoItemElem.addEventListener("click", handleClickRemoveButton); // Рабочая версия кнопки удаления
 // todoCardsElement.addEventListener("click", handleClickRemoveButton);
-
 
 if (data.length) {
 	render();
@@ -275,7 +273,7 @@ if (data.length) {
 // 	updateCounters();
 // 	// rootElement.remove()
 // 	render()
-// 	// console.log(currElemOfData);	
+// 	// console.log(currElemOfData);
 // }
 
 function changeColumn2({ target }) {
@@ -290,68 +288,72 @@ function changeColumn2({ target }) {
 
 	console.log(currElemOfData);
 
-	const selectElement = $('.item-tools__select')
-	const selectValue = selectElement.value
+	const selectElement = $(".item-tools__select");
+	const selectValue = selectElement.value;
 
-	currElemOfData.state = `${selectValue}`
+	currElemOfData.state = `${selectValue}`;
 
 	//Попытка алерта (Вроде работает)
 	let test = 0;
 
 	data.forEach((todo) => {
-		if (todo.state == 'inProgress') {
-			test += 1
+		if (todo.state == "inProgress") {
+			test += 1;
 			console.log(test);
-		} 
-	})
+		}
+	});
 
-	if(test == 7) {
-		alert('Warning')
+	if (test == 7) {
+		alert("Warning");
 
-		setDataToStorage()
+		setDataToStorage();
 
-		return
+		return;
 	}
 
 	setDataToStorage();
-	render()
-	console.log(currElemOfData);	
+	render();
+	console.log(currElemOfData);
 }
 
 function newStatus() {
-	const selectElement = $('.item-tools__select')
-	const selectValue = selectElement.value
+	const selectElement = $(".item-tools__select");
+	const selectValue = selectElement.value;
 
-	currElemOfData.state = `${selectValue}`
-	setDataToStorage()
+	currElemOfData.state = `${selectValue}`;
+	setDataToStorage();
 }
 
-todoItemElem.addEventListener('change', changeColumn2)  // Рабочий
+todoItemElem.addEventListener("change", changeColumn2); // Рабочий
 // const todoCardsElement = $('.todo__card')
 // todoContainer.addEventListener('change', changeColumn)
 // inProgressContainer.addEventListener('change', changeColumn)
 // doneContainer.addEventListener('change', changeColumn)
 
-// 	if (currElemOfData.state == "todo") {
-// 		dataProgress.push(currElemOfData);
-// 		data.pop();
-// 		setDataToStorage();
-// 		updateCounters();
-// 		render();
-// 	}
-// 	renderTest();
-// }
-
 // todoCardsElement.addEventListener("click", changeColumn);
 
-// const cardsProgress = $(".todo__card-progress");
-// function renderTest() {
-// 	let html = "";
+// Попытка пользователей через fetch
+fetch("https://jsonplaceholder.typicode.com/users")
+	.then((response) => response.json())
+	.then((users) => {
+		renderUsers(users);
+		console.log(users);
+	});
 
-// 	dataProgress.forEach((todo) => {
-// 		const template = buildTemplate(todo);
-// 		html += template;
-// 	});
+function buildUsers({ id, name }) {
+	return `
+				<option value="${id}">${name}</option>
+	`;
+}
 
-// 	cardsProgress.innerHTML = html;
-// }
+function renderUsers(users) {
+	let html = "";
+
+	users.forEach((users) => {
+		const template = buildUsers(users);
+		html += template;
+	});
+
+	selectUsersElement.insertAdjacentHTML("beforeend", html);
+	// selectUsersElement.innerHTML = html;
+}
