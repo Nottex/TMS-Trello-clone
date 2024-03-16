@@ -10,6 +10,20 @@ function $$(selector) {
 
 // const data = [];
 
+// Текущее время в header
+const clockHoursElement = $(".header__clock-hours");
+const clockMinutesElement = $(".header__clock-minutes");
+
+function currentTime() {
+	const time = new Date();
+	let hours = time.getHours().toString().padStart(2, "0");
+	let minutes = time.getMinutes().toString().padStart(2, "0");
+
+	clockHoursElement.textContent = `${hours}`;
+	clockMinutesElement.textContent = `${minutes}`;
+}
+setInterval(currentTime, 100);
+
 // Всплытие модального окна
 const addTodoBtnElement = $(".cards-item__button");
 const modal = $("#staticBackdrop");
@@ -41,18 +55,30 @@ function setDataToStorage() {
 const data = getDataFromStorage();
 
 // Создание новой карточки
-function createTodo(title, description, userName) {
-	const todo = {
-		id: Date.now(),
-		title,
-		description,
-		createdAt: new Date(),
-		state: "todo",
-		userName,
-	};
-
-	return todo;
+// Проба через класс
+class Todo {
+	constructor(title, description, userName, state) {
+		this.id = Date.now();
+		this.title = title;
+		this.description = description;
+		this.createdAt = new Date();
+		this.state = "todo";
+		this.userName = userName;
+	}
 }
+
+// function createTodo(title, description, userName) {
+// 	const todo = {
+// 		id: Date.now(),
+// 		title,
+// 		description,
+// 		createdAt: new Date(),
+// 		state: "todo",
+// 		userName,
+// 	};
+
+// 	return todo;
+// }
 
 // Шаблон карточки
 const confirmBtnElement = $(".modal__confirm-btn");
@@ -108,9 +134,11 @@ function handleClickConfirmButton() {
 	const description = modalDescriptionElement.value;
 	const userName =
 		selectUsersElement.options[selectUsersElement.selectedIndex].text;
-	const newTodo = createTodo(title, description, userName);
+	// const newTodo = createTodo(title, description, userName);
+	const newTodo = new Todo(title, description, userName);
 
 	data.push(newTodo);
+
 	setDataToStorage();
 	render();
 	resetModal();
@@ -220,6 +248,7 @@ function updateCounters() {
 function resetModal() {
 	modalInputTitleElement.value = "";
 	modalDescriptionElement.value = "";
+	selectUsersElement.value = "1";
 }
 
 // Удаление текущей карточки
@@ -304,7 +333,7 @@ function changeColumn2({ target }) {
 	});
 
 	if (test == 7) {
-		alert("Warning");
+		alert("Выполните текущие задачи, прежде чем добавлять новые!");
 
 		setDataToStorage();
 
