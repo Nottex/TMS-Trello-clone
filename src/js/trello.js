@@ -135,10 +135,6 @@ function handleClickConfirmButton() {
 confirmBtnElement.addEventListener("click", handleClickConfirmButton);
 
 // render
-const todoContainer = $("#todo");
-const inProgressContainer = $("#inProgress");
-const doneContainer = $("#done");
-
 function render() {
   resetView();
 
@@ -284,7 +280,6 @@ function renderUsers(users) {
 
 // Кнопка Delete all
 const deleteAllBtnElement = $(".delete-all__button");
-const todosDoneElement = $(".todos__done");
 
 function deleteDoneTodos() {
   const confirmDelete = confirm(
@@ -311,7 +306,6 @@ const modalEdit = new Modal(".modal__edit", {
 
 const editTitleElement = $(".edit-modal__input-title");
 const editDescriptionElement = $(".edit-modal__description-input");
-const editConfirmBtnElement = $(".edit-modal__confirm-btn");
 const editFormElement = $(".edit-form");
 const hiddenInputElement = $("#hidden-input");
 
