@@ -29,36 +29,9 @@
 							<span class="todo__header-title">TODO:</span>
 							<span class="todo__header-counter todo-counter">0</span>
 						</div>
-						<div class="todo__card" id="todo">
-							<!-- <div class="todo__cards-item card__todo">
-              <span class="cards__item-text cards__item-title">Title</span>
-              <span class="cards__item-text cards__item-description"
-                >Description</span
-              >
-              <span class="cards__item-text cards-item__user-name">User</span>
-              <div class="cards__item-info">
-                <div class="cards__item-time">
-                  <span class="item-time">02.04.24 11-50</span>
-                </div>
-                <div class="cards__item-tools">
-                  <button
-                    class="item-tools__btn item-tools__edit"
-                    type="submit"
-                  >
-                    Edit
-                  </button>
-                  <button class="item-tools__btn item-tools__select">
-                    Select
-                  </button>
-                  <button class="item-tools__btn item-tools__delete">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div> -->
-						</div>
+						<div class="todo__card" id="todo"></div>
 						<button
-							class="cards-item__button"
+							class="cards-item__button add-todo__button"
 							type="button"
 							data-bs-toggle="modal"
 							data-bs-target="#staticBackdrop"
@@ -71,78 +44,28 @@
 							<span class="todo__header-title">IN PROGRESS:</span>
 							<span class="todo__header-counter inProgress-counter">0</span>
 						</div>
-						<div class="todo__card todo__card-progress" id="inProgress">
-							<!-- <div class="todo__cards-item card__in-progress">
-              <span class="cards__item-text cards__item-title">Title</span>
-              <span class="cards__item-text cards__item-description"
-                >Description</span
-              >
-              <span class="cards__item-text cards-item__user-name">User</span>
-              <div class="cards__item-info">
-                <div class="cards__item-time">
-                  <span class="item-time">02.04.24 11-50</span>
-                </div>
-                <div class="cards__item-tools">
-                  <button
-                    class="item-tools__btn item-tools__edit"
-                    type="submit"
-                  >
-                    Edit
-                  </button>
-                  <select class="item-tools__btn item-tools__select">
-                    <option selected value="todo">Todo</option>
-                    <option value="inProgress">In Progress</option>
-                    <option value="done">Done</option>
-                  </select>
-                  <button class="item-tools__btn item-tools__delete">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div> -->
-						</div>
+						<div class="todo__card todo__card-progress" id="inProgress"></div>
 					</div>
 					<div class="todo__item todos__done">
 						<div class="todo__header">
 							<span class="todo__header-title">DONE:</span>
 							<span class="todo__header-counter done-counter">0</span>
 						</div>
-						<div class="todo__card todo__card-done" id="done">
-							<!-- <div class="todo__cards-item card__done">
-              <span class="cards__item-text cards__item-title">Title</span>
-              <span class="cards__item-text cards__item-description"
-                >Description</span
-              >
-              <span class="cards__item-text cards-item__user-name">User</span>
-              <div class="cards__item-info">
-                <div class="cards__item-time">
-                  <span class="item-time">02.04.24 11-50</span>
-                </div>
-                <div class="cards__item-tools">
-                  <button
-                    class="item-tools__btn item-tools__edit"
-                    type="submit"
-                  >
-                    Edit
-                  </button>
-                  <button class="item-tools__btn item-tools__select">
-                    Select
-                  </button>
-                  <button class="item-tools__btn item-tools__delete">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div> -->
-						</div>
-						<button class="cards-item__button" type="button">Delete all</button>
+						<div class="todo__card todo__card-done" id="done"></div>
+						<button
+							class="cards-item__button delete-all__button"
+							type="button"
+							data-role="delete-all"
+						>
+							Delete all
+						</button>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<div
-			class="modal fade"
+			class="modal fade modal__create"
 			id="staticBackdrop"
 			data-bs-backdrop="static"
 			data-bs-keyboard="false"
@@ -179,10 +102,7 @@
 							class="form-select form-select-sm w-50 create-users__select"
 							aria-label="Small select example"
 						>
-							<option selected>Select user</option>
-							<!-- <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option> -->
+							<option selected value="1">Select user</option>
 						</select>
 						<div class="modal__footer-buttons">
 							<button
@@ -202,6 +122,73 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div
+			class="modal fade modal__edit"
+			id="staticBackdrop"
+			data-bs-backdrop="static"
+			data-bs-keyboard="false"
+			tabindex="-1"
+			aria-labelledby="staticBackdropLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<form action="" class="edit-form">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="modal__title">
+								<span class="modal__title-label">Title</span>
+								<input
+									type="text"
+									class="modal__input edit-modal__input-title"
+								/>
+							</div>
+							<button
+								type="button"
+								class="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body modal__description">
+							<span class="modal__description-label">Description</span>
+							<textarea
+								name=""
+								id=""
+								cols="30"
+								rows="5"
+								class="edit-modal__description-input"
+							></textarea>
+						</div>
+						<div class="modal-footer justify-content-between modal__footer">
+							<select
+								class="form-select form-select-sm w-50 edit-users__select"
+								aria-label="Small select example"
+							>
+								<option selected value="1">Select user</option>
+							</select>
+							<div class="modal__footer-buttons">
+								<button
+									type="button"
+									class="btn btn-secondary"
+									data-bs-dismiss="modal"
+								>
+									Close
+								</button>
+								<button
+									type="submit"
+									class="btn btn-primary edit-modal__confirm-btn"
+									data-bs-dismiss="modal"
+								>
+									Confirm
+								</button>
+								<input type="hidden" value="" id="hidden-input" />
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</body>
